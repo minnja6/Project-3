@@ -7,7 +7,7 @@ $(document).ready(function(){
 });
 
 //Targetting the "Other" input field and hiding it initially with JS only
-// $('#other-title').hide();
+$('#other-title').hide();
 
 //change function
 $('#title').on('change', function(e){
@@ -19,8 +19,16 @@ $('#title').on('change', function(e){
         $('#other-title').hide();
     };
 });
-$('#title').trigger('change');
+//Updating the color field to read "Please select a T-shirt Theme"
+$('#color').prepend('<option selected>Please select a T-shirt Theme</option>');
+//Hiding the colors in the "Color" drop down menu
+$('#color option').hide();
 
-
-
+// $('#color').on('change', function(e){
+//     if ($(e.target).val == 'js puns'){
+//         $('JS shirt only').hide();
+//     }else{
+//         $('JS Puns shirt only').show();
+//     };
+// });
     
