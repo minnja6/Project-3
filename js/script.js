@@ -12,7 +12,7 @@ $('#other-title').hide();
 //change function
 $('#title').on('change', function(e){
     //Creating a conditional statement that will show the text field only when 'other' is chosen
-    if($(e.target).val() == 'other'){
+    if($(this).val() == 'other'){
         $('#other-title').show();
     } else {
         //Hiding the text field otherwise
@@ -24,11 +24,14 @@ $('#color').prepend('<option selected>Please select a T-shirt Theme</option>');
 //Hiding the colors in the "Color" drop down menu
 $('#color option').hide();
 
-// $('#color').on('change', function(e){
-//     if ($(e.target).val == 'js puns'){
-//         $('JS shirt only').hide();
-//     }else{
-//         $('JS Puns shirt only').show();
-//     };
-// });
+$('#design').on('change', function(){
+    let selectedDesign = $('#design option').val();
+    if (selectedDesign === 'js puns'){
+        $("#color option:contains('JS puns')").show();
+        $("#color option:contains('I')").hide();
+    } else {
+        $("#color option:contains('I')").show();
+        $("#color option:contains('JS puns')").hide();
+    }
+});
     
