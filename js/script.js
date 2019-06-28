@@ -25,13 +25,10 @@ $('#color').prepend('<option selected>Please select a T-shirt Theme</option>');
 $('#color option').hide();
 
 $('#design').on('change', function(){
-    let selectedDesign = $('#design option').val();
-    if (selectedDesign === 'js puns'){
-        $("#color option:contains('JS puns')").show();
-        $("#color option:contains('I')").hide();
-    } else {
-        $("#color option:contains('I')").show();
-        $("#color option:contains('JS puns')").hide();
-    }
-});
+    const design = $('#design option:selected').text();
+    const regEx = /Theme - (.*)$/;
+    const matched = design.match(regEx)[1];
+    $(`#color option:contains("${matched}")`).show();
+    $(`#color option:not(:contains("${matched}"))`).hide();
+    });
     
