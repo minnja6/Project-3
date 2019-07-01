@@ -35,47 +35,45 @@ $('#design').on('change', function(){
     $(`#color option:contains("${matched}")`).show();
     $(`#color option:not(:contains("${matched}"))`).hide();
     });
-
-//creating a variable to store the total activity costs and initially setting it to 0
-let totalCost = 0;
 //selecting "activities" by it's class
 const activities = document.querySelector('.activities');
 //adding an event listener to listen for changes in the checkboxes
-$('.activities').addEventListener('change', () => {
+activities.addEventListener('change', () => {
     //selecting the input of the checkboxes
     const checkbox = document.querySelectorAll('input[type = "checkbox"]');
-
+    //using if and else statements to disable and grey out checkboxes when conflicting days and times are selected 
     if(checkbox[1].checked){
-        checkbox[3].prop('disabled', true);
+        checkbox[3].disabled = true;
+        checkbox[3].parentNode.style.color = "grey";
     } else {
-        checkbox[3].prop('disabled', false);
+        checkbox[3].disabled = false; 
+        checkbox[3].parentNode.style.color = "black";
     }
     if(checkbox[3].checked){
-        checkbox[1].prop('disabled', true);
+        checkbox[1].disabled = true;
+        checkbox[1].parentNode.style.color = "grey";
     } else {
-        checkbox[1].prop('disabled', false);   
+        checkbox[1].disabled = false; 
+        checkbox[1].parentNode.style.color = "black";
     }
     if(checkbox[2].checked){
-        checkbox[4].prop('disabled', true);
-        checkbox[6].prop('disabled', true);
+        checkbox[4].disabled = true;
+        checkbox[4].parentNode.style.color = "grey";
     } else {
-        checkbox[4].prop('disabled', false);
-        checkbox[6].prop('disabled', false);
+        checkbox[4].disabled = false; 
+        checkbox[4].parentNode.style.color = "black";
     }
     if(checkbox[4].checked){
-        checkbox[2].prop('disabled', true);
-        checkbox[6].prop('disabled', true);
+        checkbox[2].disabled = true;
+        checkbox[2].parentNode.style.color = "grey";
     } else {
-        checkbox[2].prop('disabled', false);
-        checkbox[6].prop('disabled', false);  
-    }
-    if(checkbox[6].checked){
-        checkbox[2].prop('disabled', true);
-        checkbox[4].prop('disabled', true);
-    } else {
-        checkbox[2].prop('disabled', false);
-        checkbox[4].prop('disabled', false);  
+        checkbox[2].disabled = false;
+        checkbox[2].parentNode.style.color = "black";
+    }  
+     //creating a variable to store the total activity costs and initially setting it to 0
+    let totalCost = 0;
 });
+    
 
 
 
