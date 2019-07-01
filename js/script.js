@@ -23,11 +23,15 @@ $('#title').on('change', function(e){
 $('#color').prepend('<option selected>Please select a T-shirt Theme</option>');
 //Hiding the colors in the "Color" drop down menu
 $('#color option').hide();
-
+//using regular expression to hide/show shirt colors depending on the design
 $('#design').on('change', function(){
+    //creating a variable to hold the text of the selected design
     const design = $('#design option:selected').text();
+    //creating a variable to hold the reg ex match of the two designs
     const regEx = /Theme - (.*)$/;
+    //creating a variable to hold the first matches content
     const matched = design.match(regEx)[1];
+    //hiding and showing both matches based on which one is selected 
     $(`#color option:contains("${matched}")`).show();
     $(`#color option:not(:contains("${matched}"))`).hide();
     });
