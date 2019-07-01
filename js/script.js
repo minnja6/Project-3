@@ -31,14 +31,14 @@ $('#design').on('change', function(){
     const regEx = /Theme - (.*)$/;
     //creating a variable to hold the first matches content and regex
     const matched = design.match(regEx)[1];
-    //hiding and showing both matches based on which one is selected 
+    //hiding/showing both matches based on which one is selected 
     $(`#color option:contains("${matched}")`).show();
     $(`#color option:not(:contains("${matched}"))`).hide();
     });
-//selecting "activities" by it's class
+//selecting "activities" by it's class to be used on the event listener
 const activities = document.querySelector('.activities');
 //adding an event listener to listen for changes in the checkboxes
-activities.addEventListener('change', () => {
+activities.addEventListener('change', function(){
     //selecting the input of the checkboxes
     const checkbox = document.querySelectorAll('input[type = "checkbox"]');
     //using if and else statements to disable and grey out checkboxes when conflicting days and times are selected 
@@ -70,11 +70,18 @@ activities.addEventListener('change', () => {
         checkbox[2].disabled = false;
         checkbox[2].parentNode.style.color = "black";
     }  
-     //creating a variable to store the total activity costs and initially setting it to 0
-    let totalCost = 0;
-});
     
-
+});
+//appending the created paragraph to the activities section and hiding it's visibility
+    $('.activities').append('<p>Total Cost: <span class = "total_cost" </span></p>')
+    $('.activities p').css('display', 'none');
+//creating a variable to store the total activity costs and initially setting it to 0
+let totalCost = 0;
+$('.activities input').on('change', function(){
+    //when a checkbox is clicked, show the created paragraph text content
+    $('.activities p').css('display','block');
+    let prices = /\$\d+/;
+});
 
 
     
