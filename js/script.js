@@ -72,16 +72,37 @@ activities.addEventListener('change', function(){
     }  
     
 });
-//appending the created paragraph to the activities section and hiding it's visibility
-    $('.activities').append('<p>Total Cost: <span class = "total_cost" </span></p>')
+// appending the created paragraph to the activities section and hiding it's visibility
+    $('.activities').append('<p><span class = "total_cost" </span></p>')
     $('.activities p').css('display', 'none');
-//creating a variable to store the total activity costs and initially setting it to 0
-let totalCost = 0;
-$('.activities input').on('change', function(){
-    //when a checkbox is clicked, show the created paragraph text content
+
+// creating a variable to store the total activity costs and initially setting it to 0
+const totalCost = 0;
+    // when a checkbox is clicked, show the created paragraph text content
     $('.activities p').css('display','block');
-    let prices = /\$\d+/;
-});
+    $('.activities :checkbox').click(function() {
+        totalCost = 0;
+        $('.activities :checkbox:checked').each(function(idx, elm) {
+            switch(elm.name){
+                case "200": totalCost +=200;
+                break; 
+                case "100": totalCost +=100;
+                break;
+                case "100": totalCost +=100;
+                break;
+                case "100": totalCost +=100;
+                break;
+                case "100": totalCost +=100;
+                break;
+                case "100": totalCost +=100;
+                break;
+                case "100": totalCost +=100;
+                break;
+            }
+            
+            $('.total_cost').html(totalCost);
+        });
+    })
 
 
     
