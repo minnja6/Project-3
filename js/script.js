@@ -72,37 +72,43 @@ activities.addEventListener('change', function(){
     }  
     
 });
-// appending the created paragraph to the activities section and hiding it's visibility
-    $('.activities').append('<p><span class = "total_cost" </span></p>')
+// div = document.createElement('div');
+// $('.activities').append(div);
+// $('.activities').addEventListener('change', function(){
+
+// });
+
+
+   
     $('.activities p').css('display', 'none');
 
-// creating a variable to store the total activity costs and initially setting it to 0
-const totalCost = 0;
     // when a checkbox is clicked, show the created paragraph text content
     $('.activities p').css('display','block');
     $('.activities :checkbox').click(function() {
-        totalCost = 0;
-        $('.activities :checkbox:checked').each(function(idx, elm) {
+        // creating a variable to store the total activity costs and initially setting it to 0
+        let cost = 0;
+        $('.activities :checkbox:checked').each(function(index, elm) {
             switch(elm.name){
-                case "200": totalCost +=200;
+                case "all": cost +=200;
                 break; 
-                case "100": totalCost +=100;
+                case "js-frameworks": cost +=100;
                 break;
-                case "100": totalCost +=100;
+                case "js-libs": cost +=100;
                 break;
-                case "100": totalCost +=100;
+                case "express": cost +=100;
                 break;
-                case "100": totalCost +=100;
+                case "node": cost +=100;
                 break;
-                case "100": totalCost +=100;
+                case "build-tools": cost +=100;
                 break;
-                case "100": totalCost +=100;
+                case "npm": cost +=100;
                 break;
             }
-            
-            $('.total_cost').html(totalCost);
         });
-    })
+        $('.total_cost').text("Total cost: $" +cost);
+    });
+       // appending the created paragraph to the activities section and hiding it's visibility
+       $('.activities').append('<p><span class = "total_cost" </span></p>')
 
 
     
