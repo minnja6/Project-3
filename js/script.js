@@ -41,7 +41,8 @@ const activities = document.querySelector('.activities');
 activities.addEventListener('change', function(){
     //selecting the input of the checkboxes
     const checkbox = document.querySelectorAll('input[type = "checkbox"]');
-    //using if and else statements to disable and grey out checkboxes when conflicting days and times are selected 
+    //using if and else statements to disable and grey out checkboxes when conflicting days and times are selected
+    //also greying out the conflicting activities when chosen 
     if(checkbox[1].checked){
         checkbox[3].disabled = true;
         checkbox[3].parentNode.style.color = "grey";
@@ -72,16 +73,6 @@ activities.addEventListener('change', function(){
     }  
     
 });
-// div = document.createElement('div');
-// $('.activities').append(div);
-// $('.activities').addEventListener('change', function(){
-
-// });
-
-
-   
-    $('.activities p').css('display', 'none');
-
     // when a checkbox is clicked, show the created paragraph text content
     $('.activities p').css('display','block');
     $('.activities :checkbox').click(function() {
@@ -105,12 +96,36 @@ activities.addEventListener('change', function(){
                 break;
             }
         });
+
         $('.total_cost').text("Total cost: $" +cost);
     });
-       // appending the created paragraph to the activities section and hiding it's visibility
-       $('.activities').append('<p><span class = "total_cost" </span></p>')
+// appending the created paragraph to the activities section and hiding it's visibility
+$('.activities').append('<p><span class = "total_cost" </span></p>')
 
-
+//Using a descendant selector to select the "Select Payment Method" 'option' element and hide it 
+ $('#payment option:first').remove();
+ $('div p:contains("If you selected the")').hide();
+ //change function
+ $('#payment').on('change', function(e){
+    //Creating conditional statements that will show/hide payment option fields accordingly
+    if($(this).val() == 'credit card'){
+        $('#credit-card').show();
+        //Hiding the payment methods otherwise
+        $('div p:contains("If you selected the")').hide();
+    };
+    if($(this).val() == 'paypal'){
+        $('div p:contains("If you selected the Bitcoin")').hide();
+        $('div p:contains("If you selected the PayPal")').show();
+         //Hiding the payment methods otherwise
+         $('#credit-card').hide();
+    };
+    if($(this).val() == 'bitcoin'){
+        $('div p:contains("If you selected the PayPal")').hide();
+        $('div p:contains("If you selected the Bitcoin")').show();
+         //Hiding the payment methods otherwise
+         $('#credit-card').hide();
+    };
+});
     
 
 
