@@ -2,7 +2,7 @@
 $(document).ready(function(){
     //Selecting the "name" input element and placing focus on it
     $('#name').focus();
-    //Using a descendant selector to select the "Select Theme" 'option' element and hide it 
+        //Using a descendant selector to select the "Select Theme" 'option' element and hide it 
     $('#design option:first-Child').hide();
 });
 
@@ -103,7 +103,8 @@ activities.addEventListener('change', function(){
 $('.activities').append('<p><span class = "total_cost" </span></p>')
 
 //Using a descendant selector to select the "Select Payment Method" 'option' element and hide it 
- $('#payment option:first').remove();
+ $('#payment option:first').hide();
+ $('#payment').val('credit card');
  $('div p:contains("If you selected the")').hide();
  //change function
  $('#payment').on('change', function(e){
@@ -114,18 +115,54 @@ $('.activities').append('<p><span class = "total_cost" </span></p>')
         $('div p:contains("If you selected the")').hide();
     };
     if($(this).val() == 'paypal'){
-        $('div p:contains("If you selected the Bitcoin")').hide();
         $('div p:contains("If you selected the PayPal")').show();
          //Hiding the payment methods otherwise
+         $('div p:contains("If you selected the Bitcoin")').hide();
          $('#credit-card').hide();
     };
     if($(this).val() == 'bitcoin'){
-        $('div p:contains("If you selected the PayPal")').hide();
         $('div p:contains("If you selected the Bitcoin")').show();
          //Hiding the payment methods otherwise
+         $('div p:contains("If you selected the PayPal")').hide();
          $('#credit-card').hide();
+
     };
 });
-    
+//name validation
+let emailAddress = /^[^@]+@[^@.]+\.[a-z]+$/i;
+let creditCard = /\b\d{4}(| |-)\d{4}\1\d{4}\1\d{4}\b/g;
+let zipCode = /^\d{5}(?:[-\s]\d{4})?$/;
+$('form').prepend('<p id = "error-message"></p>')
+$('error-message').hide();
+$('form').submit(function (e){
+    e.preventDefault();
 
-
+    if($('#name').val() == ''){
+        console.log("Error!");
+        errorMessage = "<h2>Error!</h2>Please complete all fields!";
+        $('#name').addClass('error');
+        $('#name').focus();
+    } else if ( !emailAddress.test($('#mail').val()) ) {
+        errorMessage = "<h2>Error!</h2>Please enter a valid email";
+        $('#mail').focus();
+    } else if ( $("activities > label > input:checked").length == 0) {
+        errorMessage = "<h2>Error!</h2>Please select atleast one actvivity.";
+        $('.actvivities').focus();
+    } else if ($('#payment').val() == "select-method"){
+        errorMessage = "<h2>Error!</h2>Please select a payment method!";
+        $('#payment').focus();
+    } else if ($('#payment').val() == "credit card" && !creditCard.test($("#cc-num").val()) ) {
+        errorMessage = "<h2>Error!</h2>Please enter a valid credit card number!";
+        $('#cc-num').focus();
+    } else if ($('#payment').val() == "credit card" && !zipCode.test($("#zip").val()) ) {
+    errorMessage = "<h2>Error!</h2>Please enter your zip code!";
+        $('#zip').focus();
+    } else if ($('#payment').val() == "credit card" && $('#cvv').val().length < 3) {
+        errorMessage = "<h2>Error!</h2>Please enter a 3 digit CVV!";
+        $('#cvv').focus();
+    } else {
+        errorMessage = "";
+    }
+    document.getElementById('error-message').innerHTML = errorMessage;
+    $('error-message').show();
+}); 
