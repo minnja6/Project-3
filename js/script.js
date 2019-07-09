@@ -195,8 +195,6 @@ $('form').submit(function (e){
     //otherwise, don't show an error message     
     } else {
         errorMessage = "";
-        //$('#name', '#mail', '#cc-num', '#cvv', '#zip').css('borderColor', 'none');
-
     }
     document.getElementById('error-message').innerHTML = errorMessage;
 }); 
