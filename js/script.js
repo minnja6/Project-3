@@ -131,8 +131,9 @@ $('.activities').append('<p><span class = "total_cost" </span></p>')
 //name validation
 //creating regex for emails, credit cards and zipcodes
 let emailAddress = /^[^@]+@[^@.]+\.[a-z]+$/i;
-let creditCard = /\b\d{4}(| |-)\d{4}\1\d{4}\1\d{4}\b/g;
+let creditCard = /^\d{13,16}$/
 let zipCode = /^\d{5}(?:[-\s]\d{4})?$/;
+let cvv = /^\d{3}$/
 
 //prepending the error messages to the form
 $('form').prepend('<p id = "error-message"></p>');
@@ -141,56 +142,58 @@ $('error-message').hide();
 
 //creating a submit function on the form and preventing the form's automatic default
 $('form').submit(function (e){
-    e.preventDefault();
     let page = $('html, body');
     //if the name field is blank, show an error message and turn the border red
     if($('#name').val() == ''){
         console.log("Error!");
         errorMessage = "<p>Error!</p>Please complete all fields!";
         $('#name').addClass('error');
-        $('#name').css('borderColor', 'red');
         page.animate({scrollTop: 0}, "slow");
         $('#name').focus();
+        e.preventDefault();
 
     //if the email address does not pass the regex test, show error message and turn the border red    
     } else if ( !emailAddress.test($('#mail').val()) ) {
         errorMessage = "<p>Error!</p>Please enter a valid email!";
-        $('#mail').css('borderColor', 'red');
         page.animate({scrollTop: 0}, "slow");
         $('#mail').focus();
+        e.preventDefault();
 
     //if no activities are checked, show error message      
     } else if ( $(".activities > label > input:checked").length == 0) {
         errorMessage = "<p>Error!</p>Please select atleast one actvivity!";
         page.animate({scrollTop: 0}, "slow");
         $('.actvivities').focus();
+        e.preventDefault();
 
     //if no payment method is selected, show error message     
     } else if ($('#payment').val() == "select-method"){
         errorMessage = "<p>Error!</p>Please select a payment method!";
         page.animate({scrollTop: 0}, "slow");
         $('#payment').focus();
+        e.preventDefault();
 
     //if credit card is selected as payment method and card num input doesn't pass the regex test, show error message    
     } else if ($('#payment').val() == "credit card" && !creditCard.test($("#cc-num").val()) ) {
         errorMessage = "<p>Error!</p>Please enter a valid credit card number!";
-        $('#cc-num').css('borderColor', 'red');
         page.animate({scrollTop: 0}, "slow");
         $('#cc-num').focus();
+        e.preventDefault();
+
 
     //if payment selected is credit card and zip code doesn't pass regex test, show error message     
     } else if ($('#payment').val() == "credit card" && !zipCode.test($("#zip").val()) ) {
     errorMessage = "<p>Error!</p>Please enter your zip code!";
-    $('#zip').css('borderColor', 'red');
     page.animate({scrollTop: 0}, "slow");
         $('#zip').focus();
+        e.preventDefault();
 
     //if payment selected is credit card and cvv is less than 3 nums, show error message    
     } else if ($('#payment').val() == "credit card" && $('#cvv').val().length < 3) {
         errorMessage = "<p>Error!</p>Please enter a 3 digit CVV!";
-        $('#cvv').css('borderColor', 'red');
         page.animate({scrollTop: 0}, "slow");
         $('#cvv').focus();
+        e.preventDefault();
 
     //otherwise, don't show an error message     
     } else {
