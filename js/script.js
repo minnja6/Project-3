@@ -143,7 +143,7 @@ $('error-message').hide();
 //creating a submit function on the form and preventing the form's automatic default
 $('form').submit(function (e){
     let page = $('html, body');
-    //if the name field is blank, show an error message and turn the border red
+    //if the name field is blank, show an error message
     if($('#name').val() == ''){
         console.log("Error!");
         errorMessage = "<p>Error!</p>Please complete all fields!";
@@ -152,7 +152,7 @@ $('form').submit(function (e){
         $('#name').focus();
         e.preventDefault();
 
-    //if the email address does not pass the regex test, show error message and turn the border red    
+    //if the email address does not pass the regex test, show error message   
     } else if ( !emailAddress.test($('#mail').val()) ) {
         errorMessage = "<p>Error!</p>Please enter a valid email!";
         page.animate({scrollTop: 0}, "slow");
