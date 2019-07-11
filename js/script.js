@@ -148,6 +148,7 @@ $('form').submit(function (e){
         console.log("Error!");
         errorMessage = "<p>Error!</p>Please complete all fields!";
         $('#name').addClass('error');
+        $('#name').css('borderColor', 'red');
         page.animate({scrollTop: 0}, "slow");
         $('#name').focus();
         e.preventDefault();
@@ -156,6 +157,7 @@ $('form').submit(function (e){
     } else if ( !emailAddress.test($('#mail').val()) ) {
         errorMessage = "<p>Error!</p>Please enter a valid email!";
         page.animate({scrollTop: 0}, "slow");
+        $('#mail').css('borderColor', 'red');
         $('#mail').focus();
         e.preventDefault();
 
@@ -177,6 +179,7 @@ $('form').submit(function (e){
     } else if ($('#payment').val() == "credit card" && !creditCard.test($("#cc-num").val()) ) {
         errorMessage = "<p>Error!</p>Please enter a valid credit card number!";
         page.animate({scrollTop: 0}, "slow");
+        $('#cc-num').css('borderColor', 'red');
         $('#cc-num').focus();
         e.preventDefault();
 
@@ -186,12 +189,14 @@ $('form').submit(function (e){
     errorMessage = "<p>Error!</p>Please enter your zip code!";
     page.animate({scrollTop: 0}, "slow");
         $('#zip').focus();
+        $('#zip').css('borderColor', 'red');
         e.preventDefault();
 
     //if payment selected is credit card and cvv is less than 3 nums, show error message    
     } else if ($('#payment').val() == "credit card" && $('#cvv').val().length < 3) {
         errorMessage = "<p>Error!</p>Please enter a 3 digit CVV!";
         page.animate({scrollTop: 0}, "slow");
+        $('#cvv').css('borderColor', 'red');
         $('#cvv').focus();
         e.preventDefault();
 
